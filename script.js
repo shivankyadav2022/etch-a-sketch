@@ -1,0 +1,1 @@
+const side = prompt("Enter the side of Square gird");
