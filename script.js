@@ -1,4 +1,4 @@
-let side =16;
+let side =8;
 const button=document.querySelector("#inputButton");
 console.log(button);
 button.addEventListener("click",inputButtonEventHandler);
@@ -14,12 +14,13 @@ const gridContainer = document.querySelector("#container");
 
  for(i=0;i<side;i++){
     let gridPixelV = document.createElement("div");
-    gridPixelV.style.height='20px';
+    const dimension = (400/side);
     gridPixelV.classList.add('pixel');
     gridContainer.appendChild(gridPixelV);
     for(j=0;j<side;j++){
         let gridPixelH = document.createElement("div");
-        gridPixelH.style.height='20px';
+        gridPixelH.style.height=`${dimension}px`;
+        gridPixelH.style.width=`${dimension}px`;
         gridPixelH.style.border='2px solid black';
         gridPixelH.classList.add('pixel');
         gridPixelV.appendChild(gridPixelH);
