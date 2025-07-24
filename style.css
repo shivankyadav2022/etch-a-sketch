@@ -21,6 +21,7 @@ h1{
     width:400px;
     border:10px solid rgb(201, 201, 231);
     background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 #container .pixel .pixel{
