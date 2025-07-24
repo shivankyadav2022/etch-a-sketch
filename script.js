@@ -16,14 +16,7 @@ function inputButtonEventHandler (){
     constructGrid();
 
     // add hover event listener to paint pixels//
-
-const elementsToColor = document.querySelectorAll(".pixel");
-
-elementsToColor.forEach(elements => {
-    elements.addEventListener("mouseover",()=>{
-        elements.style.backgroundColor="black";
-    })
-})
+    hoverColor();
     }
 
 const gridContainer = document.querySelector("#container");
@@ -32,14 +25,13 @@ function constructGrid (){
  for(i=0;i<side;i++){
     let gridPixelV = document.createElement("div");
     const dimension = (400/side);
-    gridPixelV.classList.add('pixel');
     gridContainer.appendChild(gridPixelV);
     for(j=0;j<side;j++){
         let gridPixelH = document.createElement("div");
         gridPixelH.style.height=`${dimension}px`;
         gridPixelH.style.width=`${dimension}px`;
-       // gridPixelH.style.border='2px solid black';
         gridPixelH.classList.add('pixel');
+        gridPixelH.style.opacity='0.1';
         gridPixelV.appendChild(gridPixelH);
 
 
@@ -52,10 +44,30 @@ constructGrid();
 
 // add hover event listener to paint pixels//
 
+function hoverColor(){
 const elementsToColor = document.querySelectorAll(".pixel");
 
 elementsToColor.forEach(elements => {
-    elements.addEventListener("mouseover",()=>{
-        elements.style.backgroundColor="black";
+    elements.addEventListener("mouseenter",()=>{
+        const computedStyle = window.getComputedStyle(elements);
+        const backgroundColor = computedStyle.backgroundColor;
+        if(backgroundColor==='rgba(0, 0, 0, 0)' || backgroundColor ==="transparent"){
+        elements.style.backgroundColor=getRandomColor();}
+    });
+    elements.addEventListener("mouseleave",()=>{
+        const currentOpacity = parseFloat(elements.style.opacity) || 1;
+        elements.style.opacity= Math.min(currentOpacity+0.1, 1);
     })
 })
+}
+hoverColor();
+
+//function to get random rgb combination
+
+function getRandomColor (){
+    const red =Math.floor(Math.random()*255);
+    const green = Math.floor(Math.random()*255);
+    const blue = Math.floor(Math.random()*255);
+
+    return `rgb(${red},${green},${blue})`;
+}
